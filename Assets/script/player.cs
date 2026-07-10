@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     bool jump;
 
     bool isJump;
+    Animator anim;
+
 
     public float Speed;
     public float JumpPower;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
         moveVec = new Vector3(moveX, 0, moveZ).normalized;
 
         transform.position += moveVec * Speed * Time.deltaTime;
+        anim.SetBool("isWalk", moveVec != Vector3.zero);
     }
 
     void Jump()
